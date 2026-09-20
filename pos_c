@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <string.h>
+int main() {
+    char input[50];
+
+    printf("=== 711便利店 POS 系统 ===\n");
+    printf("输入 'prices' 看商品，输入'exit' 退出\n");
+ 
+    while(1) {
+        printf(">");
+        scanf("&s",input);
+        
+        if (strcmp(input, "exit") == 0){
+            printf("再见\n");
+            break;
+        }
+        else if (strcmp(input, "prices") == 0){
+            printf("Item    No.   Pri.\n");
+            printf("Cola    001   3.50\n");
+            printf("Lollipop 002  0.50\n");
+            printf("Noodles 003   6.00\n");
+        }
+        else {
+            printf("你输入了：%s (以后这里用来扫码）\n",input);
+        }
+    }
+    
+    return 0;
+}
+
