@@ -42,7 +42,7 @@ int main() {
                 for (int j=0;j<cart_count;j++){
                     float littletotal=cart[j].item.price*cart[j].quantity;
                     total=littletotal+total;
-                    printf("%-9s %.2f x %d = %.2f\n",cart[j].item.name,cart[j].item.price,cart[j].quantity,littletotal);
+                    printf("%-9s   %.2f   x   %d   =   %.2f\n",cart[j].item.name,cart[j].item.price,cart[j].quantity,littletotal);
                 }
                 printf("----------------------------------------\n");
                 printf("Total:%.2f\n",total);
@@ -55,7 +55,7 @@ int main() {
                 for (int j=0;j<cart_count;j++){
                     float littletotal=cart[j].item.price*cart[j].quantity;
                     total=littletotal+total;
-                    printf("%-9s %.2f x %d = %.2f\n",cart[j].item.name,cart[j].item.price,cart[j].quantity,littletotal);
+                    printf("%-9s   %.2f   x   %d   =   %.2f\n",cart[j].item.name,cart[j].item.price,cart[j].quantity,littletotal);
                 }
                 cart_count=0;
                 printf("----------------------------------------\n");
@@ -80,34 +80,39 @@ int main() {
                 for(int k =0;k<item_count;k++){
                     if(strcmp(code,items[k].code)==0){
                     found=1;
-                    }
+                    int cart_idx=-1;
                     for(int x=0;x<cart_count;x++){
-                        int cart_idx=-1;
-                        if(x==cart_idx){
+                        if(strcmp(code,cart[x].item.code)==0){
+                            cart_idx=x;
                             break;
-                    }
-                if(is_minus==1){
-                   if(cart_idx!=-1){
-                       cart[cart_idx].quantity--;
-                       if (cart[cart_idx].quantity<=0){
-                           cart[cart_idx]=cart[cart_count -1];
-                           cart_count--;
-                       }
-                   }
-                }
-                else{
-                    if(cart_idx!=-1){
-                        cart[cart_idx].quantity++;
-                    }
-                    else{
-                        if(cart_count<50){
-                            cart[cart_count].item=items[k];
-                            cart[cart_count].quantity=1;
-                            cart_count++;}}
                         }
                     }
+                    if(is_minus==1){
+                       if(cart_idx!=-1){
+                           cart[cart_idx].quantity--;
+                           if (cart[cart_idx].quantity<=0){
+                               cart[cart_idx]=cart[cart_count -1];
+                               cart_count--;
+                           }
+                       }
+                    }
+                    else{
+                        if(cart_idx!=-1){
+                            cart[cart_idx].quantity++;
+                        }
+                        else{
+                            if(cart_count<50){
+                                cart[cart_count].item=items[k];
+                                cart[cart_count].quantity=1;
+                                cart_count++;
+                            }
+                            else{
+                                printf("购物车已满\n");
+                            }
+                        }
+                    }
+                    break;
                 }
-            }
-       }
-       return 0;
-}
+           }
+         } } return 0;
+    }
