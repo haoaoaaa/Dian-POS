@@ -14,6 +14,7 @@ int quantity;
 char input[50];
 CartItem cart[50];
 int cart_count = 0;
+int order_id=1;
 int main() {
     printf("---七一一便利店POS系统---\n");
     Item items[3]={
@@ -70,6 +71,7 @@ int main() {
                             printf("%-9s   %.2f   x   %d   =   %.2f\n",cart[j].item.name,cart[j].item.price,cart[j].quantity,littletotal);
                             fprintf(fp,"%s x%d, ",cart[j].item.name,cart[j].quantity);
                         }
+                    }
                     cart_count=0;
                     printf("----------------------------------------\n");
                     printf("Total:%.2f\n",total);
@@ -132,5 +134,6 @@ int main() {
                    }
                 }
            }
-         } } return 0;
+       }
+       return 0;
     }
