@@ -46,6 +46,40 @@ int main() {
                 is_admin=0;
                 printf("Bye.\n");
             }
+            else if(strcmp(cmd,"restock")==0){
+                char code[10];
+                int amount;
+                sscanf(input,"%s %s %d",cmd,code,&amount);
+                int found=0;
+                for(int i=0;i<item_count;i++){
+                    if(strcmp(code,items[i].code)==0){
+                        int found =0;
+                        for (int i = 0;i<item_count;i++){
+                            if(strcmp(code,items[i].code)==0){
+                                items[i].stock+=amount;
+                                printf("Restocked!New stock: %d\n",items[i].stock);
+                                found=1;
+                                break;
+                            }
+                        }
+                        if (!found){
+                            printf("ERROR:Item not found.\n");
+                        }
+                    }
+                }
+            }
+            else if(strcmp(cmd,"setstock")==0){
+                char code[50];
+                int amount;
+                sscanf(input,"%s %s %d",cmd,code,&amount);
+                for(int i=0;i<item_count;i++){
+                    if(strcmp(code,items[i].code)==0){
+                        items[i].stock=amount;
+                        printf("Stock set to %d\n",items[i].stock);
+                        break;
+                    }
+                }
+            }
             else if(strcmp(cmd,"itemadd")==0){
                 char name[50],code[10];
                 float new_prices;
@@ -99,7 +133,7 @@ int main() {
                 else if (strcmp(input,"prices")==0){
                     printf("Item     Code    Price    Stock\n");
                     for (int i =0;i<item_count;i++){
-                        printf("%-9s %s %.2f %d\n",items[i].name,items[i].code,items[i].price,items[i].stock);
+                        printf("%-9s %s    %.2f      %d\n",items[i].name,items[i].code,items[i].price,items[i].stock);
                     }
                 }
                 else if (strcmp(input,"print")==0){
@@ -181,18 +215,25 @@ int main() {
                                 }
                             }
                             else{
-                                if(cart_idx!=-1){
-                                    cart[cart_idx].quantity++;
-                                }
-                                else{
-                                    if(cart_count<50){
-                                        cart[cart_count].item=items[k];
-                                        cart[cart_count].quantity=1;
-                                        cart_count++;
+                                if(items[k].stock>0){
+                                    items[k].stock--;
+                                    printf("Added!Stock left: %d\n",items[k].stock);
+                                    if(cart_idx!=-1){
+                                        cart[cart_idx].quantity++;
                                     }
                                     else{
-                                         printf("购物车已满\n");
+                                        if(cart_count<50){
+                                            cart[cart_count].item=items[k];
+                                            cart[cart_count].quantity=1;
+                                            cart_count++;
+                                        }
+                                        else{
+                                            printf("购物车已满\n");
+                                        }
                                     }
+                                }
+                                else{
+                                    printf("ERROR:Out of stock!\n");
                                 }
                             }
                             break;

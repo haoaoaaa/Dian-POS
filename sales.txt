@@ -2,3 +2,4 @@
 1, 2026-09-26 13:39:02, Noodles x3, Lollipop x2, Cola x2, Total: 26.00
 1, 2026-09-26 13:52:43, Cola x2, Lollipop x1, Noodles x1, Total: 13.50
 1, 2026-09-26 14:08:01, Cola x2, Lollipop x2, Noodles x3, Total: 26.00
+1, 2026-09-26 15:17:13, Cola x1, Total: 3.50
