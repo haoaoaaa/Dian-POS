@@ -2,3 +2,5 @@ pos
 hello
 *.o
 *.out
+.vscode/
+
